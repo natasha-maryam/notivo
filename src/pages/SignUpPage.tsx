@@ -17,9 +17,9 @@ function RightPromo() {
         </div>
 
         {/* Text */}
-        <div className="px-6 md:px-8 pt-28 max-w-[85%] relative z-[3] flex flex-col pb-[-6]">
-          <h2 className="text-[32px] leading-[38px] font-extrabold tracking-[-0.02em] text-[#333333] w-full block">
-            Lead Smarter with Better Team Insights
+        <div className="px-6 md:px-8 pt-28 max-w-[90%] relative z-[3] flex flex-col pb-[-6]">
+          <h2 className="text-[32px] leading-[38px] font-extrabold text-[#333333] w-full block"   style={{ letterSpacing: "-2.5px" }}>
+              Lead Smarter with Better Team Insights
           </h2>
           <p className="mt-3 text-[15px] leading-[22px] text-[#1f2937]/75 max-w-[560px]">
             Capture feedback, track growth, and simplify performance
@@ -131,7 +131,7 @@ function InputWithIcon({
 
   return (
     <div>
-      <label htmlFor={inputId} className="block text-[13px] font-medium text-gray-700">
+      <label htmlFor={inputId} className="block text-[14px] font-medium text-gray-700">
         {label}
       </label>
       <div className="mt-1 relative">
@@ -167,7 +167,7 @@ export default function SignUpPage() {
         <div className="flex-1 grid place-items-center mt-10 md:mt-16">
           <div className="w-full max-w-[420px] lg:max-w-[480px] text-center md:text-left">
             <h1 className="text-[28px] leading-[34px] font-semibold text-gray-900">Sign up</h1>
-            <p className="mt-1 text-[13px] leading-[18px] text-gray-500">Enter your details to signup.</p>
+            <p className="mt-1 text-[16px] leading-[18px] text-[#33333399]">Enter your details to signup.</p>
 
             <div className="mt-8 space-y-4">
               <SocialButton provider="google">Sign up with Google</SocialButton>

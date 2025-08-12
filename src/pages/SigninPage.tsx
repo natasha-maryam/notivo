@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Password from "../assets/svgs/password.svg";
 import Email from "../assets/svgs/email.svg";
 
-
 function RightPromo() {
   return (
     <aside className="hidden md:block relative h-full w-full p-2 sm:p-2 lg:p-2">
@@ -19,7 +18,10 @@ function RightPromo() {
 
         {/* Text */}
         <div className="px-6 md:px-8 pt-28 max-w-[85%] relative z-[3] flex flex-col pb-[-6]">
-          <h2 className="text-[32px] leading-[38px] font-extrabold tracking-[-0.02em] text-[#333333] w-full block">
+          <h2
+            className="text-[32px] leading-[38px] font-extrabold text-[#333333] w-full block"
+            style={{ letterSpacing: "-2.5px" }}
+          >
             Lead Smarter with Better Team Insights
           </h2>
           <p className="mt-3 text-[15px] leading-[22px] text-[#1f2937]/75 max-w-[560px]">
@@ -47,9 +49,6 @@ function RightPromo() {
     </aside>
   );
 }
-
-
-
 
 function GoogleIcon({ className = "" }: { className?: string }) {
   return (
@@ -80,14 +79,10 @@ function FacebookIcon({ className = "" }: { className?: string }) {
   );
 }
 function MailIcon({ className = "" }: { className?: string }) {
-  return (
-    <img src={Email} alt="Mail icon" className={className} />
-  );
+  return <img src={Email} alt="Mail icon" className={className} />;
 }
 function LockIcon({ className = "" }: { className?: string }) {
-  return (
-    <img src={Password} alt="Lock icon" className={className} />
-  );
+  return <img src={Password} alt="Lock icon" className={className} />;
 }
 function SocialButton({
   provider,
@@ -237,7 +232,10 @@ export default function SigninPage() {
                   />
                   Keep me logged in
                 </label>
-                <a href="#" className="text-xs text-[#333333] hover:underline underline">
+                <a
+                  href="#"
+                  className="text-xs text-[#333333] hover:underline underline"
+                >
                   <span>Forgot password?</span>
                 </a>
               </div>
