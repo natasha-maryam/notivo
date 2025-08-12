@@ -82,7 +82,7 @@ function SocialButton({ provider, children }: { provider: "google" | "facebook";
   return (
     <button
       type="button"
-      className="w-full h-10 inline-flex items-center justify-center gap-2 rounded-md ring-1 ring-[#EDEDED] px-3 text-sm font-medium  bg-[#F5F5F6] hover:bg-[#F5F5F6]"
+      className="w-full h-10 inline-flex items-center justify-center gap-2 rounded-xl ring-1 ring-[#EDEDED] px-3 text-sm font-medium  bg-[#F5F5F6] hover:bg-[#F5F5F6]"
     >
       <Icon className="w-[18px] h-[18px]" />
       <span>{children}</span>
