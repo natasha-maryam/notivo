@@ -1,7 +1,7 @@
 import React, { useId, useState } from "react";
 import { Link } from "react-router-dom";
 import Password from "../assets/svgs/password.svg";
-import Email from "../assets/svgs/Email.svg";
+import Email from "../assets/svgs/email.svg";
 
 
 function RightPromo() {

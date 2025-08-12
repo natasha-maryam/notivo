@@ -2,7 +2,7 @@ import React, { useId, useState } from "react";
 import { Link } from "react-router-dom";
 import Password from "../assets/svgs/password.svg";
 import User from "../assets/svgs/User.svg";
-import Email from "../assets/svgs/Email.svg";
+import Email from "../assets/svgs/email.svg";
 function RightPromo() {
   return (
     <aside className="hidden md:block relative h-full w-full p-2 sm:p-2 lg:p-2">
