@@ -11,7 +11,7 @@ function RightPromo() {
         <div className="absolute inset-0">
           <div
             className="pointer-events-none absolute
-              -bottom-1 -left-1 w-[230px] border-[40px]
+              bottom-4 left-0 w-[230px] border-[45px]
               aspect-square rounded-full border-[#3333331A] z-[1]"
           />
         </div>
@@ -32,14 +32,14 @@ function RightPromo() {
         </div>
 
         {/* Big image that stays big */}
-        <div className="relative h-full z-[2] pt-10 pr-6 overflow-hidden">
+        <div className="relative h-full z-[2] pt-6 pr-6 ">
           <img
             src="/right-pannel.avif"
             alt="Product preview"
             loading="lazy"
             draggable={false}
             className="
-              select-none rounded-xl shadow-2xl transform-gpu origin-center rotate-[-5deg] ml-16
+              select-none rounded-xl shadow-2xl transform-gpu origin-center rotate-[-6deg] ml-24
               scale-[1]  /* Keeps it large */
               min-w-[500px] /* Prevents shrinking too much */
             "

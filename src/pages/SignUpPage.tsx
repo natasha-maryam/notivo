@@ -11,15 +11,18 @@ function RightPromo() {
         <div className="absolute inset-0">
           <div
             className="pointer-events-none absolute
-              -bottom-1 -left-1 w-[230px] border-[40px]
+              bottom-4 left-0 w-[230px] border-[45px]
               aspect-square rounded-full border-[#3333331A] z-[1]"
           />
         </div>
 
         {/* Text */}
-        <div className="px-6 md:px-8 pt-28 max-w-[90%] relative z-[3] flex flex-col pb-[-6]">
-          <h2 className="text-[32px] leading-[38px] font-extrabold text-[#333333] w-full block"   style={{ letterSpacing: "-2.5px" }}>
-              Lead Smarter with Better Team Insights
+        <div className="px-6 md:px-8 pt-28 max-w-[85%] relative z-[3] flex flex-col pb-[-6]">
+          <h2
+            className="text-[32px] leading-[38px] font-extrabold text-[#333333] w-full block"
+            style={{ letterSpacing: "-2.5px" }}
+          >
+            Lead Smarter with Better Team Insights
           </h2>
           <p className="mt-3 text-[15px] leading-[22px] text-[#1f2937]/75 max-w-[560px]">
             Capture feedback, track growth, and simplify performance
@@ -29,14 +32,14 @@ function RightPromo() {
         </div>
 
         {/* Big image that stays big */}
-        <div className="relative h-full z-[2] pt-10 pr-6 overflow-hidden">
+        <div className="relative h-full z-[2] pt-6 pr-6 ">
           <img
             src="/right-pannel.avif"
             alt="Product preview"
             loading="lazy"
             draggable={false}
             className="
-              select-none rounded-xl shadow-2xl transform-gpu origin-center rotate-[-5deg] ml-16
+              select-none rounded-xl shadow-2xl transform-gpu origin-center rotate-[-6deg] ml-24
               scale-[1]  /* Keeps it large */
               min-w-[500px] /* Prevents shrinking too much */
             "
