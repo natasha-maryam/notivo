@@ -1,61 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
-  HiOutlineSearch,
-  HiOutlineDocumentText,
-  HiOutlineUsers,
-  HiOutlineTag,
-  HiOutlineBriefcase,
-  HiOutlineCog,
-  HiOutlineMenuAlt2,
+  HiChevronRight,
 } from "react-icons/hi";
 import SideBottom from "../../assets/images/sidebar-bottom.png";
 import ArrowRight from "../../assets/svgs/arrow-right.svg";
 import LeftIcon from "../../assets/svgs/chevron-left.svg";
+import SimpleSidebar from "./SimpleSidebar";
+
+import Search from "../../assets/svgs/side-search.svg"
+import Notes from "../../assets/svgs/notes.svg"
+import People from "../../assets/svgs/people.svg"
+import Tags from "../../assets/svgs/side-tag.svg"
+import Workspaces from "../../assets/svgs/workspace.svg"
+import Settings from "../../assets/svgs/settings-02.svg"
+import ActiveSearch from "../../assets/svgs/search-refraction.svg"
+import ActiveNotes from "../../assets/svgs/active-notes.svg"
+import ActivePeople from "../../assets/svgs/active-people.svg"
+import ActiveTags from "../../assets/svgs/tag.svg"
+import ActiveWorkspaces from "../../assets/svgs/active-work.svg"
+import ActiveSettings from "../../assets/svgs/settings-02.svg"
+
 
 interface SidebarProps {
   collapsed: boolean;
   iconsOnly: boolean;
   onToggle: () => void;
+  onClose?: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
   collapsed,
   iconsOnly,
   onToggle,
+  onClose,
 }) => {
+  const [mainSidebarVisible, setMainSidebarVisible] = useState(true);
+  
   const menuItems = [
-    { path: "/search", label: "Search", icon: HiOutlineSearch },
-    { path: "/notes", label: "Notes", icon: HiOutlineDocumentText },
-    { path: "/people", label: "People", icon: HiOutlineUsers },
-    { path: "/tags", label: "Tags", icon: HiOutlineTag },
-    { path: "/workspaces", label: "Workspaces", icon: HiOutlineBriefcase },
-    { path: "/settings", label: "Settings", icon: HiOutlineCog },
+    { path: "/search", label: "Search", icon: Search , activeIcon: ActiveSearch },
+    { path: "/notes", label: "Notes", icon: Notes , activeIcon: ActiveNotes },
+    { path: "/people", label: "People", icon: People , activeIcon: ActivePeople },
+    { path: "/tags", label: "Tags", icon: Tags , activeIcon: ActiveTags },
+    { path: "/workspaces", label: "Workspaces", icon: Workspaces , activeIcon: ActiveWorkspaces },
+    { path: "/settings", label: "Settings", icon: Settings , activeIcon: ActiveSettings },
   ];
+
+  const toggleMainSidebar = () => {
+    setMainSidebarVisible(!mainSidebarVisible);
+  };
 
   if (collapsed) return null;
 
   return (
-    <div
-      className={`bg-[#F5F5F6] flex flex-col transition-all duration-300 font-poppins ${
-        iconsOnly ? "w-16" : "w-[178px]"
-      }`}
-    >
-      {/* Logo and Toggle */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <img src="/logo.avif" alt="notivo logo" className="h-4" />
-      </div>
-
-      {/* Navigation */}
+    <div className="flex h-full">
+      {/* Main Sidebar - conditionally rendered */}
+      {mainSidebarVisible && (
+        <div
+          className={`bg-[#F5F5F6] flex flex-col transition-all duration-300 font-poppins h-full ${
+            iconsOnly ? "w-16" : "w-[178px]"
+          }`}
+        >
+      {/* Navigation - no logo section needed */}
       <nav className="flex-1 p-4">
-        <div className="flex justify-between mb-6 items-center">
-          <p className="text-[18px] font-medium">Sources</p>
-          <img
-            src={LeftIcon}
-            alt="Left Icon"
-            className="w-[18px] h-[18px] cursor-pointer"
-            onClick={onToggle}
-          />
+        <div className={`flex mb-6 items-center ${iconsOnly ? 'justify-center' : 'justify-between'}`}>
+          {!iconsOnly && (
+            <p className="text-[18px] font-medium">Sources</p>
+          )}
+          <div className="flex items-center space-x-1">
+            <button
+              onClick={onToggle}
+              className="p-1 rounded hover:bg-[#F5F5F6] transition-colors"
+              title={iconsOnly ? "Expand sidebar" : "Collapse to icons"}
+            >
+              {iconsOnly ? (
+                <HiChevronRight className="w-[20px] h-[20px] text-gray-600" />
+              ) : (
+                <img
+                  src={LeftIcon}
+                  alt="Collapse"
+                  className="w-[18px] h-[18px]"
+                />
+              )}
+            </button>
+          </div>
         </div>
         <ul className="space-y-2">
           {menuItems.map((item) => {
@@ -65,7 +93,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <NavLink
                   to={item.path}
                   className={({ isActive }) =>
-                    `flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    `flex items-center rounded-lg text-sm font-medium transition-colors ${
+                      iconsOnly 
+                        ? "justify-center px-2 py-3" 
+                        : "px-3 py-2"
+                    } ${
                       isActive ? "bg-[#ECECED] text-black" : ""
                     }`
                   }
@@ -73,11 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon
-                        className={`w-5 h-5 flex-shrink-0 ${
-                          isActive ? "text-black" : "text-[#9C9C9C]"
-                        }`}
-                      />
+                      <img src={isActive ? item.activeIcon : item.icon} className={`w-[18px] h-[18px] flex-shrink-0`} />
                       {!iconsOnly && (
                         <span className="ml-3 text-[14px] text-black">
                           {item.label}
@@ -128,6 +156,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
       )}
+        </div>
+      )}
+      
+      {/* Right SimpleSidebar - always visible */}
+      <SimpleSidebar onToggle={toggleMainSidebar} />
     </div>
   );
 };

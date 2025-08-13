@@ -1,94 +1,92 @@
-import React, { useState } from 'react';
-import { HiOutlineBriefcase, HiOutlinePlus, HiOutlineSearch, HiOutlineUsers, HiOutlineDocumentText } from 'react-icons/hi';
+// import React, { useState } from 'react';
+// import { HiOutlineBriefcase, HiOutlinePlus, HiOutlineSearch, HiOutlineUsers, HiOutlineDocumentText } from 'react-icons/hi';
 
 const Workspaces = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const workspaces = [
-    {
-      id: 1,
-      name: 'Product Development',
-      description: 'Main workspace for all product development activities, feature planning, and technical documentation.',
-      members: 12,
-      notes: 45,
-      color: 'bg-blue-500',
-      lastActivity: '2 hours ago',
-      status: 'active'
-    },
-    {
-      id: 2,
-      name: 'Design System',
-      description: 'Centralized design system documentation, components library, and design guidelines.',
-      members: 8,
-      notes: 28,
-      color: 'bg-purple-500',
-      lastActivity: '1 day ago',
-      status: 'active'
-    },
-    {
-      id: 3,
-      name: 'Marketing Campaigns',
-      description: 'Campaign planning, content creation, and marketing strategy documentation.',
-      members: 6,
-      notes: 33,
-      color: 'bg-green-500',
-      lastActivity: '3 hours ago',
-      status: 'active'
-    },
-    {
-      id: 4,
-      name: 'User Research',
-      description: 'User interview notes, research findings, and behavioral analysis documentation.',
-      members: 5,
-      notes: 22,
-      color: 'bg-orange-500',
-      lastActivity: '5 hours ago',
-      status: 'active'
-    },
-    {
-      id: 5,
-      name: 'Engineering Standards',
-      description: 'Code standards, best practices, and technical guidelines for the development team.',
-      members: 15,
-      notes: 38,
-      color: 'bg-red-500',
-      lastActivity: '1 week ago',
-      status: 'archived'
-    },
-    {
-      id: 6,
-      name: 'Client Projects',
-      description: 'External client project documentation, requirements, and deliverables tracking.',
-      members: 10,
-      notes: 56,
-      color: 'bg-indigo-500',
-      lastActivity: '4 hours ago',
-      status: 'active'
-    }
-  ];
+  // const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredWorkspaces = workspaces.filter(workspace =>
-    workspace.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    workspace.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const workspaces = [
+  //   {
+  //     id: 1,
+  //     name: 'Product Development',
+  //     description: 'Main workspace for all product development activities, feature planning, and technical documentation.',
+  //     members: 12,
+  //     notes: 45,
+  //     color: 'bg-blue-500',
+  //     lastActivity: '2 hours ago',
+  //     status: 'active'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Design System',
+  //     description: 'Centralized design system documentation, components library, and design guidelines.',
+  //     members: 8,
+  //     notes: 28,
+  //     color: 'bg-purple-500',
+  //     lastActivity: '1 day ago',
+  //     status: 'active'
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Marketing Campaigns',
+  //     description: 'Campaign planning, content creation, and marketing strategy documentation.',
+  //     members: 6,
+  //     notes: 33,
+  //     color: 'bg-green-500',
+  //     lastActivity: '3 hours ago',
+  //     status: 'active'
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'User Research',
+  //     description: 'User interview notes, research findings, and behavioral analysis documentation.',
+  //     members: 5,
+  //     notes: 22,
+  //     color: 'bg-orange-500',
+  //     lastActivity: '5 hours ago',
+  //     status: 'active'
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Engineering Standards',
+  //     description: 'Code standards, best practices, and technical guidelines for the development team.',
+  //     members: 15,
+  //     notes: 38,
+  //     color: 'bg-red-500',
+  //     lastActivity: '1 week ago',
+  //     status: 'archived'
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'Client Projects',
+  //     description: 'External client project documentation, requirements, and deliverables tracking.',
+  //     members: 10,
+  //     notes: 56,
+  //     color: 'bg-indigo-500',
+  //     lastActivity: '4 hours ago',
+  //     status: 'active'
+  //   }
+  // ];
 
-  const activeWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'active');
-  const archivedWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'archived');
+  // const filteredWorkspaces = workspaces.filter(workspace =>
+  //   workspace.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   workspace.description.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+  // const activeWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'active');
+  // const archivedWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'archived');
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Workspaces</h1>
-          <p className="text-gray-600">Organize your projects and collaborate with your team.</p>
+          <p className="text-gray-600">
+            Organize your projects and collaborate with your team.
+          </p>
         </div>
-        <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-          <HiOutlinePlus className="w-5 h-5" />
-          <span>New Workspace</span>
-        </button>
       </div>
+      {/* 
 
-      {/* Search */}
       <div className="bg-white rounded-lg border border-gray-200 p-4">
         <div className="relative">
           <HiOutlineSearch className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -100,10 +98,10 @@ const Workspaces = () => {
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-      </div>
+      </div> */}
 
       {/* Workspace Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -151,9 +149,9 @@ const Workspaces = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* Active Workspaces */}
+      {/* 
       {activeWorkspaces.length > 0 && (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-gray-900">Active Workspaces</h2>
@@ -193,7 +191,7 @@ const Workspaces = () => {
         </div>
       )}
 
-      {/* Archived Workspaces */}
+    
       {archivedWorkspaces.length > 0 && (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-gray-900">Archived Workspaces</h2>
@@ -238,7 +236,7 @@ const Workspaces = () => {
             <span>Create Workspace</span>
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

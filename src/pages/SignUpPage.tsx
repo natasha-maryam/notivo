@@ -142,7 +142,7 @@ function InputWithIcon({
         <input
           id={inputId}
           type={effectiveType}
-          className="w-full h-10 rounded-xl ring-1 ring-[#EDEDED] focus:ring-2 focus:ring-emerald-500/60 pl-9 pr-10 text-[13px] placeholder:text-[12px] placeholder:text-gray-400"
+          className="w-full h-10 rounded-xl border border-[#EDEDED] focus:border-[#8DE87F] hover:border-[#8DE87F] focus:outline-none pl-9 pr-10 text-[13px] placeholder:text-[12px] placeholder:text-gray-400"
           {...inputProps}
         />
         {isPwd && withVisibilityToggle && (
