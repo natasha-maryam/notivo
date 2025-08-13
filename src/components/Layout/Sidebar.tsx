@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  HiChevronRight,
-} from "react-icons/hi";
 import SideBottom from "../../assets/images/sidebar-bottom.png";
 import ArrowRight from "../../assets/svgs/arrow-right.svg";
 import LeftIcon from "../../assets/svgs/chevron-left.svg";
@@ -42,7 +39,16 @@ const Sidebar: React.FC<SidebarProps> = ({
     { path: "/notes", label: "Notes", icon: Notes , activeIcon: ActiveNotes },
     { path: "/people", label: "People", icon: People , activeIcon: ActivePeople },
     { path: "/tags", label: "Tags", icon: Tags , activeIcon: ActiveTags },
-    { path: "/workspaces", label: "Workspaces", icon: Workspaces , activeIcon: ActiveWorkspaces },
+    { 
+      path: "/workspaces", 
+      label: "Workspaces", 
+      icon: Workspaces, 
+      activeIcon: ActiveWorkspaces,
+      hasSubmenu: true,
+      submenu: [
+        { path: "/reports", label: "Reports" }
+      ]
+    },
     { path: "/settings", label: "Settings", icon: Settings , activeIcon: ActiveSettings },
   ];
 
@@ -74,7 +80,11 @@ const Sidebar: React.FC<SidebarProps> = ({
               title={iconsOnly ? "Expand sidebar" : "Collapse to icons"}
             >
               {iconsOnly ? (
-                <HiChevronRight className="w-[20px] h-[20px] text-gray-600" />
+                <img
+                  src={ArrowRight}
+                  alt="Expand"
+                  className="w-[18px] h-[18px]"
+                />
               ) : (
                 <img
                   src={LeftIcon}
@@ -90,30 +100,85 @@ const Sidebar: React.FC<SidebarProps> = ({
             const Icon = item.icon;
             return (
               <li key={item.path}>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `flex items-center rounded-lg text-sm font-medium transition-colors ${
-                      iconsOnly 
-                        ? "justify-center px-2 py-3" 
-                        : "px-3 py-2"
-                    } ${
-                      isActive ? "bg-[#ECECED] text-black" : ""
-                    }`
-                  }
-                  title={iconsOnly ? item.label : undefined}
-                >
-                  {({ isActive }) => (
-                    <>
-                      <img src={isActive ? item.activeIcon : item.icon} className={`w-[18px] h-[18px] flex-shrink-0`} />
-                      {!iconsOnly && (
-                        <span className="ml-3 text-[14px] text-black">
-                          {item.label}
-                        </span>
+                {item.hasSubmenu ? (
+                  <div>
+                    {/* Main Workspaces item */}
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        `flex items-center rounded-lg text-sm font-medium transition-colors ${
+                          iconsOnly 
+                            ? "justify-center px-2 py-3" 
+                            : "px-3 py-2"
+                        } ${
+                          isActive ? "bg-[#ECECED] text-black" : ""
+                        }`
+                      }
+                      title={iconsOnly ? item.label : undefined}
+                    >
+                      {({ isActive }) => (
+                        <>
+                          <img src={isActive ? item.activeIcon : item.icon} className={`w-[18px] h-[18px] flex-shrink-0`} />
+                          {!iconsOnly && (
+                            <span className="ml-3 text-[14px] text-black">
+                              {item.label}
+                            </span>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
-                </NavLink>
+                    </NavLink>
+                    
+                    {/* Submenu - Always visible */}
+                    {!iconsOnly && item.submenu && (
+                      <div className="mt-1 relative">
+                        {item.submenu.map((subItem, index) => (
+                          <div key={subItem.path} className="relative">
+                            {/* Vertical line */}
+                            <div className="absolute left-6 top-0 bottom-0 w-[1px] bg-[#DEE0E3]"></div>
+                            {/* Horizontal connector line */}
+                            {/* <div className="absolute left-6 top-1/2 w-4 h-[1px] bg-gray-300"></div> */}
+                            
+                            <NavLink
+                              to={subItem.path}
+                              className={({ isActive }) =>
+                                `flex items-center py-2 pl-8 pr-3 text-sm font-medium transition-colors rounded-lg ml-2 ${
+                                  isActive ? "bg-[#ECECED] text-black" : "text-gray-700 hover:bg-[#ECECED]"
+                                }`
+                              }
+                            >
+                              <span className="text-[14px]">{subItem.label}</span>
+                            </NavLink>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `flex items-center rounded-lg text-sm font-medium transition-colors ${
+                        iconsOnly 
+                          ? "justify-center px-2 py-3" 
+                          : "px-3 py-2"
+                      } ${
+                        isActive ? "bg-[#ECECED] text-black" : ""
+                      }`
+                    }
+                    title={iconsOnly ? item.label : undefined}
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <img src={isActive ? item.activeIcon : item.icon} className={`w-[18px] h-[18px] flex-shrink-0`} />
+                        {!iconsOnly && (
+                          <span className="ml-3 text-[14px] text-black">
+                            {item.label}
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                )}
               </li>
             );
           })}

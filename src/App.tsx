@@ -7,6 +7,7 @@ import Notes from "./pages/Notes";
 import People from "./pages/People";
 import Tags from "./pages/Tags";
 import Workspaces from "./pages/Workspaces";
+import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 
 export default function App() {
@@ -41,6 +42,11 @@ export default function App() {
       <Route path="/workspaces" element={
         <DashboardLayout>
           <Workspaces />
+        </DashboardLayout>
+      } />
+      <Route path="/reports" element={
+        <DashboardLayout>
+          <Reports />
         </DashboardLayout>
       } />
       <Route path="/settings" element={
