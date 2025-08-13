@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import SimpleSidebar from './SimpleSidebar';
-import Header from './Header';
+import React, { useState } from "react";
+import Sidebar from "./Sidebar";
+import SimpleSidebar from "./SimpleSidebar";
+import Header from "./Header";
 
 interface LayoutWithRightSidebarProps {
   children: React.ReactNode;
 }
 
-const LayoutWithRightSidebar: React.FC<LayoutWithRightSidebarProps> = ({ children }) => {
+const LayoutWithRightSidebar: React.FC<LayoutWithRightSidebarProps> = ({
+  children,
+}) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarIconsOnly, setSidebarIconsOnly] = useState(false);
   const [rightSidebarVisible, setRightSidebarVisible] = useState(true);
@@ -39,15 +41,12 @@ const LayoutWithRightSidebar: React.FC<LayoutWithRightSidebarProps> = ({ childre
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-      {/* Header spans full width */}
-      <Header 
-        onToggleSidebar={toggleSidebarVisibility} 
+      <Header
+        onToggleSidebar={toggleSidebarVisibility}
         sidebarCollapsed={sidebarCollapsed}
       />
-      
-      {/* Main content area with left sidebar, content, and right sidebar */}
+
       <div className="flex flex-1 overflow-hidden">
-        {/* Fixed sidebar toggle button when sidebar is completely hidden */}
         {sidebarCollapsed && (
           <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50">
             <button
@@ -71,21 +70,16 @@ const LayoutWithRightSidebar: React.FC<LayoutWithRightSidebarProps> = ({ childre
             </button>
           </div>
         )}
-        
-        {/* Left Sidebar */}
-        <Sidebar 
-          collapsed={sidebarCollapsed} 
+
+        <Sidebar
+          collapsed={sidebarCollapsed}
           iconsOnly={sidebarIconsOnly}
           onToggle={toggleSidebar}
           onClose={toggleSidebarVisibility}
         />
-        
-        {/* Main Content */}
-        <main className="flex-1 overflow-y-auto p-6">
-          {children}
-        </main>
 
-        {/* Right Sidebar */}
+        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+
         {rightSidebarVisible && (
           <SimpleSidebar onToggle={handleRightSidebarClose} />
         )}

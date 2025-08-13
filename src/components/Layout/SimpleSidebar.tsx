@@ -14,7 +14,6 @@ const SimpleSidebar: React.FC<SimpleSidebarProps> = ({
     <div
       className={`bg-[#FAFAFA] flex flex-col w-16 h-full  ${className}`}
     >
-      {/* Single close icon item */}
       <div className="p-4">
         <div className="flex justify-center">
           <button

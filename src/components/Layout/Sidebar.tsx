@@ -60,14 +60,14 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="flex h-full">
-      {/* Main Sidebar - conditionally rendered */}
+
       {mainSidebarVisible && (
         <div
           className={`bg-[#F5F5F6] flex flex-col transition-all duration-300 font-poppins h-full ${
             iconsOnly ? "w-16" : "w-[178px]"
           }`}
         >
-      {/* Navigation - no logo section needed */}
+ 
       <nav className="flex-1 p-4">
         <div className={`flex mb-6 items-center ${iconsOnly ? 'justify-center' : 'justify-between'}`}>
           {!iconsOnly && (
@@ -185,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </ul>
       </nav>
 
-      {/* Upgrade Section */}
+   
       {!iconsOnly && (
         <div className="p-4">
           <div className="rounded-lg p-4">
@@ -224,7 +224,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
       )}
       
-      {/* Right SimpleSidebar - always visible */}
+     
       <SimpleSidebar onToggle={toggleMainSidebar} />
     </div>
   );
