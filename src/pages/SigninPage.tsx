@@ -1,5 +1,5 @@
 import React, { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Password from "../assets/svgs/password.svg";
 import Email from "../assets/svgs/email.svg";
 
@@ -175,6 +175,14 @@ function InputWithIcon({
 }
 
 export default function SigninPage() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically handle authentication
+    // For now, we'll just redirect to dashboard
+    navigate('/search');
+  };
   return (
     <div className="min-h-screen flex flex-col md:grid md:grid-cols-2 font-poppins">
       <section className="bg-white px-5 sm:px-16 md:px-9 lg:px-16 xl:px-24 pb-12 flex flex-col">
@@ -205,7 +213,7 @@ export default function SigninPage() {
 
             <DividerWithText text="or" />
 
-            <form className="space-y-5 text-left mt-8">
+            <form className="space-y-5 text-left mt-8" onSubmit={handleSubmit}>
               <InputWithIcon
                 label="Email"
                 type="email"

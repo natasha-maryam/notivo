@@ -1,5 +1,5 @@
 import React, { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Password from "../assets/svgs/password.svg";
 import User from "../assets/svgs/User.svg";
 import Email from "../assets/svgs/email.svg";
@@ -160,6 +160,15 @@ function InputWithIcon({
   );
 }
 export default function SignUpPage() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically handle user registration
+    // For now, we'll just redirect to dashboard
+    navigate('/search');
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:grid md:grid-cols-2 font-poppins">
       <section className="bg-white px-5 sm:px-16 md:px-9 lg:px-16 xl:px-24 pb-12 flex flex-col">
@@ -179,7 +188,7 @@ export default function SignUpPage() {
 
             <DividerWithText text="or" />
 
-            <form className="space-y-5 text-left mt-8">
+            <form className="space-y-5 text-left mt-8" onSubmit={handleSubmit}>
               <InputWithIcon label="Full name" placeholder="Full Name" Icon={UserIcon} name="fullName" autoComplete="name" />
               <InputWithIcon label="Email" type="email" placeholder="Email" Icon={MailIcon} name="email" autoComplete="email" />
               <InputWithIcon label="Password" type="password" placeholder="Password" Icon={LockIcon} name="password" autoComplete="new-password" withVisibilityToggle />
