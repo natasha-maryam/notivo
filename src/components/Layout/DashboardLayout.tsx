@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
@@ -7,6 +8,9 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+  const location = useLocation();
+  const isPeoplePage = location.pathname === '/people';
+  
   // Initialize sidebar state based on screen size
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -105,10 +109,21 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           iconsOnly={sidebarIconsOnly}
           onToggle={toggleSidebar}
           onClose={toggleSidebarVisibility}
+          hideSimpleSidebar={isPeoplePage}
         />
         
-        <main className={`flex-1 overflow-y-auto p-4 md:p-6 ${sidebarCollapsed ? 'md:ml-0' : ''}`}>
-          {children}
+        <main className={`flex-1 overflow-hidden ${
+          isPeoplePage 
+            ? '' 
+            : `overflow-y-auto p-4 md:p-6 ${sidebarCollapsed ? 'md:ml-0' : ''}`
+        }`}>
+          {isPeoplePage 
+            ? React.cloneElement(children as React.ReactElement, {
+                onToggleSidebar: toggleSidebarVisibility,
+                sidebarCollapsed
+              })
+            : children
+          }
         </main>
       </div>
     </div>

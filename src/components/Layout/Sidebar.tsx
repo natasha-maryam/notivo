@@ -24,6 +24,7 @@ interface SidebarProps {
   iconsOnly: boolean;
   onToggle: () => void;
   onClose?: () => void;
+  hideSimpleSidebar?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -31,6 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   iconsOnly,
   onToggle,
   onClose,
+  hideSimpleSidebar = false,
 }) => {
   const [mainSidebarVisible, setMainSidebarVisible] = useState(true);
   
@@ -55,6 +57,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   const toggleMainSidebar = () => {
     setMainSidebarVisible(!mainSidebarVisible);
   };
+
+  if (collapsed && !hideSimpleSidebar) {
+    return <SimpleSidebar onToggle={onClose || (() => {})} />;
+  }
 
   if (collapsed) return null;
 
@@ -225,7 +231,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       )}
       
      
-      <SimpleSidebar onToggle={toggleMainSidebar} />
+      {!hideSimpleSidebar && <SimpleSidebar onToggle={toggleMainSidebar} />}
     </div>
   );
 };
