@@ -10,6 +10,8 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const location = useLocation();
   const isPeoplePage = location.pathname === '/people';
+  const isTagsPage = location.pathname === '/tags';
+  const isCustomLayoutPage = isPeoplePage || isTagsPage;
   
   // Initialize sidebar state based on screen size
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
@@ -109,15 +111,15 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           iconsOnly={sidebarIconsOnly}
           onToggle={toggleSidebar}
           onClose={toggleSidebarVisibility}
-          hideSimpleSidebar={isPeoplePage}
+          hideSimpleSidebar={isCustomLayoutPage}
         />
         
         <main className={`flex-1 overflow-hidden ${
-          isPeoplePage 
+          isCustomLayoutPage 
             ? '' 
             : `overflow-y-auto p-4 md:p-6 ${sidebarCollapsed ? 'md:ml-0' : ''}`
         }`}>
-          {isPeoplePage 
+          {isCustomLayoutPage 
             ? React.cloneElement(children as React.ReactElement, {
                 onToggleSidebar: toggleSidebarVisibility,
                 sidebarCollapsed
