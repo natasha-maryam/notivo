@@ -11,7 +11,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const location = useLocation();
   const isPeoplePage = location.pathname === '/people';
   const isTagsPage = location.pathname === '/tags';
-  const isCustomLayoutPage = isPeoplePage || isTagsPage;
+  const isNotesPage = location.pathname === '/notes';
+  const isCustomLayoutPage = isPeoplePage || isTagsPage || isNotesPage;
   
   // Initialize sidebar state based on screen size
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {

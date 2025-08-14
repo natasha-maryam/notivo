@@ -75,22 +75,6 @@ const Tags: React.FC<TagsProps> = ({
       color: "bg-gray-400",
       description: "Things to remember and follow up on",
     },
-    {
-      id: "6",
-      name: "testing", 
-      count: 1,
-      date: "May 12, 2025 at 7:50 PM",
-      color: "bg-gray-400",
-      description: "Testing observations and usability feedback",
-    },
-    {
-      id: "7",
-      name: "issue",
-      count: 1,
-      date: "May 12, 2025 at 7:50 PM", 
-      color: "bg-gray-400",
-      description: "Issues and problems encountered",
-    },
   ];
 
   // Initialize selectedTag as null for mobile-first approach
@@ -153,7 +137,7 @@ const Tags: React.FC<TagsProps> = ({
       <div
         className={`${
           isMobile ? (selectedTag ? "hidden" : "w-full") : "w-80"
-        } border-r border-gray-200 flex flex-col bg-[#F5F5F6] transition-all duration-300`}
+        }  flex flex-col bg-[#F5F5F6] transition-all duration-300`}
       >
         {/* Header */}
         <div className="px-3 py-2">

@@ -185,7 +185,7 @@ const People: React.FC<PeopleProps> = ({
         isMobile 
           ? (selectedContact ? 'hidden' : 'w-full') 
           : 'w-80'
-      } border-r border-gray-200 flex flex-col bg-[#F5F5F6] transition-all duration-300`}>
+      }  flex flex-col bg-[#F5F5F6] transition-all duration-300`}>
         
         {/* Header */}
         <div className="px-3 py-2">
