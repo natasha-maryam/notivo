@@ -38,34 +38,6 @@ const PeopleManagementTab = () => {
       firstMentionDate: '1 weeks ago',
       numberOfNotes: '1 notes'
     },
-    {
-      id: 6,
-      name: 'David Larson',
-      position: 'VP of Design',
-      firstMentionDate: '2 weeks ago',
-      numberOfNotes: '8 notes'
-    },
-    {
-      id: 7,
-      name: 'Emma Thompson',
-      position: 'Product Manager',
-      firstMentionDate: '6 day ago',
-      numberOfNotes: '5 notes'
-    },
-    {
-      id: 8,
-      name: 'Alex Chen',
-      position: 'Accountant',
-      firstMentionDate: '4 day ago',
-      numberOfNotes: '2 notes'
-    },
-    {
-      id: 9,
-      name: 'Olivia Bennett',
-      position: 'Senior Manger',
-      firstMentionDate: '3 day ago',
-      numberOfNotes: '4 notes'
-    }
   ];  return (
     <div className="p-4">
       {/* Header with title and Add person button */}

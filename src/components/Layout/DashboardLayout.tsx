@@ -119,7 +119,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <main className={`flex-1 overflow-hidden ${
           isCustomLayoutPage 
             ? '' 
-            : `overflow-y-auto p-4 md:p-6 ${sidebarCollapsed ? 'md:ml-0' : ''}`
+            : `overflow-y-auto  ${sidebarCollapsed ? 'md:ml-0' : ''}`
         }`}>
           {isCustomLayoutPage 
             ? React.cloneElement(children as React.ReactElement, {

@@ -91,7 +91,7 @@ const Settings: React.FC<SettingsProps> = ({
   };
 
   return (
-    <div className="space-y-4 font-poppins px-6 py-3">
+    <div className="space-y-4 font-poppins px-6 py-3 overflow-y-scroll bg-white">
       <div>
         <h1 className="text-[18px] font-medium text-[#333333]">Settings</h1>
       </div>

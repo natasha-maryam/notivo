@@ -4,7 +4,7 @@ import Visa from "../../assets/images/visa.png"
 
 const PlansAndBillingTab = () => {
   return (
-    <div className="border border-[#EDEDED] rounded-xl p-4">
+    <div className="border border-[#EDEDED] rounded-xl p-4 overflow-y-scroll">
       <div>
         <h3
           className="text-[18px] font-medium text-gray-900 mb-6"
@@ -41,7 +41,7 @@ const PlansAndBillingTab = () => {
                 </p>
               </div>
             </div>
-            <button className="bg-white backdrop-blur-sm text-[#333333] px-4 py-2 rounded-xl text-[15px] font-medium hover:bg-white transition-colors mt-3">
+            <button className="hidden lg:block bg-white backdrop-blur-sm text-[#333333] px-4 py-2 rounded-xl text-[15px] font-medium hover:bg-white transition-colors mt-3">
               Change plan
             </button>
           </div>

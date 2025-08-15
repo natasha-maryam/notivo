@@ -1,242 +1,256 @@
-// import React, { useState } from 'react';
-// import { HiOutlineBriefcase, HiOutlinePlus, HiOutlineSearch, HiOutlineUsers, HiOutlineDocumentText } from 'react-icons/hi';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SearchIcon from '../assets/svgs/search-refraction.svg';
+import Filter from "../assets/svgs/filter.svg";
+import Menu from "../assets/svgs/dots-vertical.svg"
 
 const Workspaces = () => {
-  // const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // const workspaces = [
-  //   {
-  //     id: 1,
-  //     name: 'Product Development',
-  //     description: 'Main workspace for all product development activities, feature planning, and technical documentation.',
-  //     members: 12,
-  //     notes: 45,
-  //     color: 'bg-blue-500',
-  //     lastActivity: '2 hours ago',
-  //     status: 'active'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Design System',
-  //     description: 'Centralized design system documentation, components library, and design guidelines.',
-  //     members: 8,
-  //     notes: 28,
-  //     color: 'bg-purple-500',
-  //     lastActivity: '1 day ago',
-  //     status: 'active'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Marketing Campaigns',
-  //     description: 'Campaign planning, content creation, and marketing strategy documentation.',
-  //     members: 6,
-  //     notes: 33,
-  //     color: 'bg-green-500',
-  //     lastActivity: '3 hours ago',
-  //     status: 'active'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'User Research',
-  //     description: 'User interview notes, research findings, and behavioral analysis documentation.',
-  //     members: 5,
-  //     notes: 22,
-  //     color: 'bg-orange-500',
-  //     lastActivity: '5 hours ago',
-  //     status: 'active'
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Engineering Standards',
-  //     description: 'Code standards, best practices, and technical guidelines for the development team.',
-  //     members: 15,
-  //     notes: 38,
-  //     color: 'bg-red-500',
-  //     lastActivity: '1 week ago',
-  //     status: 'archived'
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Client Projects',
-  //     description: 'External client project documentation, requirements, and deliverables tracking.',
-  //     members: 10,
-  //     notes: 56,
-  //     color: 'bg-indigo-500',
-  //     lastActivity: '4 hours ago',
-  //     status: 'active'
-  //   }
-  // ];
+  // Mock data matching the design
+  const yourWorkspaces = [
+    {
+      id: 1,
+      title: 'Q4 performance review summary',
+      description: 'Comprehensive review of team performance metrics...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Final',
+      statusColor: 'bg-[#008844] text-white',
+      user: 'Sarah, John Wilson',
+      tags: ['#feedback', '#performance', '#Q4']
+    },
+    {
+      id: 2,
+      title: 'Project Alpha Feedback Compilation',
+      description: 'Stakeholder feedback and recommendations...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Draft',
+      statusColor: 'bg-[#E16B16] text-white',
+      user: 'Alex Emily Chen',
+      tags: ['#feedback', '#project-alpha', '#nextsteps']
+    },
+    {
+      id: 3,
+      title: 'Q4 team feedback session',
+      description: 'Summary of feedback gathered...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Final',
+      statusColor: 'bg-[#008844] text-white',
+      user: 'James Davis, Sophia',
+      tags: ['#discussion', '#feedback', '#team']
+    }
+  ];
 
-  // const filteredWorkspaces = workspaces.filter(workspace =>
-  //   workspace.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   workspace.description.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
-
-  // const activeWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'active');
-  // const archivedWorkspaces = filteredWorkspaces.filter(ws => ws.status === 'archived');
+  const otherWorkspaces = [
+    {
+      id: 4,
+      title: 'Q4 performance review summary',
+      description: 'Comprehensive review of team performance metrics...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Final',
+       statusColor: 'bg-[#008844] text-white',
+      user: 'Alex Emily Chen',
+      tags: ['#feedback', '#project-alpha', '#nextsteps']
+    },
+    {
+      id: 5,
+      title: 'Q4 performance review summary',
+      description: 'Comprehensive review of team performance metrics...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Final',
+       statusColor: 'bg-[#008844] text-white',
+      user: 'Alex Emily Chen',
+      tags: ['#feedback', '#project-alpha', '#nextsteps']
+    },
+    {
+      id: 6,
+      title: 'Q4 performance review summary',
+      description: 'Comprehensive review of team performance metrics...',
+      modified: 'July 12, 2025 at 7:50 PM',
+      status: 'Final',
+       statusColor: 'bg-[#008844] text-white',
+      user: 'Alex Emily Chen',
+      tags: ['#feedback', '#project-alpha', '#nextsteps']
+    }
+  ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Workspaces</h1>
-          <p className="text-gray-600">
-            Organize your projects and collaborate with your team.
-          </p>
-        </div>
-      </div>
-      {/* 
+    <div className="min-h-screen font-poppins bg-white py-4 pl-6 pr-2">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-[18px] font-medium text-[#333333] mb-4">
+          Workspace
+        </h1>
 
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <div className="relative">
-          <HiOutlineSearch className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search workspaces..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-      </div> */}
-
-      {/* Workspace Stats */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Total Workspaces</p>
-              <p className="text-2xl font-semibold text-gray-900">{workspaces.length}</p>
+        {/* Search and Filter */}
+        <div className="flex gap-2 mb-6">
+          <div className="relative flex-1">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <img
+                src={SearchIcon}
+                alt="Search"
+                className="h-5 w-5 text-gray-400"
+              />
             </div>
-            <div className="bg-blue-500 p-3 rounded-lg">
-              <HiOutlineBriefcase className="w-6 h-6 text-white" />
-            </div>
+            <input
+              type="text"
+              placeholder="Search workspaces..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#8DE87F] focus:border-[#8DE87F] bg-transparent"
+            />
           </div>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Active</p>
-              <p className="text-2xl font-semibold text-gray-900">{activeWorkspaces.length}</p>
-            </div>
-            <div className="bg-green-500 p-3 rounded-lg">
-              <HiOutlineBriefcase className="w-6 h-6 text-white" />
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Total Members</p>
-              <p className="text-2xl font-semibold text-gray-900">{workspaces.reduce((sum, ws) => sum + ws.members, 0)}</p>
-            </div>
-            <div className="bg-purple-500 p-3 rounded-lg">
-              <HiOutlineUsers className="w-6 h-6 text-white" />
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Total Notes</p>
-              <p className="text-2xl font-semibold text-gray-900">{workspaces.reduce((sum, ws) => sum + ws.notes, 0)}</p>
-            </div>
-            <div className="bg-orange-500 p-3 rounded-lg">
-              <HiOutlineDocumentText className="w-6 h-6 text-white" />
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* 
-      {activeWorkspaces.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Active Workspaces</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {activeWorkspaces.map((workspace) => (
-              <div key={workspace.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className={`w-12 h-12 ${workspace.color} rounded-lg flex items-center justify-center`}>
-                    <HiOutlineBriefcase className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900">{workspace.name}</h3>
-                    <p className="text-sm text-gray-500">Last updated {workspace.lastActivity}</p>
-                  </div>
-                </div>
-                
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">{workspace.description}</p>
-                
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-1 text-gray-600">
-                      <HiOutlineUsers className="w-4 h-4" />
-                      <span>{workspace.members}</span>
-                    </div>
-                    <div className="flex items-center space-x-1 text-gray-600">
-                      <HiOutlineDocumentText className="w-4 h-4" />
-                      <span>{workspace.notes}</span>
-                    </div>
-                  </div>
-                  <span className="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">
-                    Active
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-    
-      {archivedWorkspaces.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Archived Workspaces</h2>
-          <div className="bg-white rounded-lg border border-gray-200">
-            {archivedWorkspaces.map((workspace, index) => (
-              <div key={workspace.id} className={`p-4 hover:bg-gray-50 ${index !== archivedWorkspaces.length - 1 ? 'border-b border-gray-200' : ''}`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-10 h-10 ${workspace.color} opacity-60 rounded-lg flex items-center justify-center`}>
-                      <HiOutlineBriefcase className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">{workspace.name}</h3>
-                      <p className="text-sm text-gray-600">{workspace.description}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <span>{workspace.members} members</span>
-                      <span>{workspace.notes} notes</span>
-                    </div>
-                    <span className="px-2 py-1 bg-gray-50 text-gray-600 rounded-full text-xs font-medium">
-                      Archived
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {filteredWorkspaces.length === 0 && (
-        <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
-          <HiOutlineBriefcase className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No workspaces found</h3>
-          <p className="text-gray-600 mb-4">
-            {searchTerm ? 'Try adjusting your search terms.' : 'Get started by creating your first workspace.'}
-          </p>
-          <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mx-auto">
-            <HiOutlinePlus className="w-5 h-5" />
-            <span>Create Workspace</span>
+          <button className="px-4 py-2 bg-transparent border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-50">
+            <img
+              src={Filter}
+              alt="Filter"
+              className="h-[15px] w-[15px] text-gray-400"
+            />
+            <span className="text-sm font-medium text-gray-700 bg-transparent">
+              Filters
+            </span>
           </button>
         </div>
-      )} */}
+      </div>
+
+      {/* Your workspaces section */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-[18px] font-medium text-gray-900">
+            Your workspaces
+          </h2>
+          <button 
+            onClick={() => navigate('/workspaces/new')}
+            className="inline-flex items-center px-3 py-1 text-[14px] font-medium text-white bg-[#333333] rounded-full hover:bg-[#333333] transition-colors"
+          >
+            <span className="mr-2">+</span>
+            New Workspace
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {yourWorkspaces.map((workspace) => (
+            <div
+              key={workspace.id}
+              className="rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-start justify-between mb-3">
+                <h3
+                  className="font-semibold text-gray-900 text-[14px]"
+                  style={{ letterSpacing: "-0.5px" }}
+                >
+                  {workspace.title}
+                </h3>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <img src={Menu} alt="Menu" />
+                </button>
+              </div>
+
+              <p className="text-[12px] text-[#333333] mb-3 line-clamp-2">
+                {workspace.description}
+              </p>
+
+              <div className="text-xs text-gray-500 mb-3">
+                Modified: {workspace.modified} Status:
+                <span
+                  className={`ml-2 px-2 py-1 rounded-lg text-xs font-medium ${workspace.statusColor}`}
+                >
+                  {workspace.status}
+                </span>
+              </div>
+
+              <div className="flex items-center text-xs text-[#287AFF] mb-3">
+                @{workspace.user}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {workspace.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs text-black  px-2 py-1 rounded-full border border-[#E5E7EB]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Other workspaces section */}
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <h2 className="text-[18px] font-medium text-gray-900">
+            Other workspaces
+          </h2>
+          <span className="bg-[#EDEDED] text-gray-600 text-xs px-2 py-1 rounded-full">
+            {otherWorkspaces.length}
+          </span>
+        </div>
+
+        <div className="rounded-lg border border-gray-200">
+          {otherWorkspaces.map((workspace, index) => (
+            <div
+              key={workspace.id}
+              className={`p-4 hover:bg-gray-50 transition-colors ${
+                index !== otherWorkspaces.length - 1
+                  ? "border-b border-gray-100"
+                  : ""
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="font-semibold text-gray-900 text-sm">
+                      {workspace.title}
+                    </h3>
+                    <div className="flex gap-2">
+                      <div className="text-xs text-gray-500">
+                        Modified: {workspace.modified}
+                      </div>
+                      <button className="text-gray-400 hover:text-gray-600 ml-4">
+                        <img src={Menu} alt="Menu" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className="text-[12px] text-[#333333] mb-3 line-clamp-2">
+                    {workspace.description}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="text-xs text-[#287AFF]">
+                        @{workspace.user}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {workspace.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs text-black  px-2 py-1 rounded-full border border-[#E5E7EB]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className='flex gap-1 items-center'>
+                      <span className='text-[12px]'> Status:</span>
+                      <span
+                        className={`ml-2 px-2 py-1 rounded-lg text-xs font-medium ${workspace.statusColor}`}
+                      >
+                        {workspace.status}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
