@@ -6,7 +6,7 @@ import CalendarIcon from "../assets/svgs/Frame.svg";
 import DownloadIcon from "../assets/svgs/download.svg";
 import FilterIcon from "../assets/svgs/filter.svg";
 import ChevronDownIcon1 from "../assets/svgs/arrow-left.svg";
-import PDFIcon from "../assets/svgs/file.svg";
+import PDFIcon from "../assets/svgs/File.svg";
  import ChevronDownIcon from "../assets/svgs/chevron-left.svg";
 
 
