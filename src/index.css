@@ -18,3 +18,23 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+/* Hide default calendar icon in Chrome, Safari, Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+/* Hide in Firefox */
+input[type="date"] {
+  -moz-appearance: textfield;
+}
+
+/* Optional: Prevent extra padding where the icon was */
+input[type="date"] {
+  position: relative;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+ 
+}

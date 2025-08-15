@@ -1,12 +1,17 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "../assets/svgs/search-refraction.svg";
-import CalendarIcon from "../assets/svgs/calendar.svg";
-import DownloadIcon from "../assets/svgs/download4.svg";
+import CalendarIcon from "../assets/svgs/Frame.svg";
+import DownloadIcon from "../assets/svgs/download.svg";
 import FilterIcon from "../assets/svgs/filter.svg";
-import ChevronDownIcon from "../assets/svgs/chevron-left.svg";
+import ChevronDownIcon1 from "../assets/svgs/arrow-left.svg";
+import PDFIcon from "../assets/svgs/file.svg";
+ import ChevronDownIcon from "../assets/svgs/chevron-left.svg";
+
 
 const Reports = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPeople, setSelectedPeople] = useState("@select");
   const [selectedTags, setSelectedTags] = useState("#select");
@@ -91,12 +96,23 @@ const Reports = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-50 min-h-screen">
+    <div className="flex flex-col bg-gray-50 min-h-screen bg-[#ffffff]">
       <div className="flex-1 p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Downloads</h1>
+          <div className="flex items-start mb-8 flex-col">
+             <button 
+              onClick={() => navigate('/workspaces')}
+              className=" my-5 hover:bg-gray-100 rounded-full"
+            >
+              <img 
+                src={ChevronDownIcon1} 
+                alt="Back" 
+                className="h-6 w-6 " 
+              />
+            </button>
+         
+            <h1 className="text-2xl font-semibold text-gray-900">Downloads</h1>
           </div>
 
           {/* Search Bar */}
@@ -109,7 +125,7 @@ const Reports = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-[10px] leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search all reports..."
               />
             </div>
@@ -119,19 +135,21 @@ const Reports = () => {
           <div className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Select People */}
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#33333399] mb-3">
                 Select people
               </label>
               <div className="relative">
                 <button
                   onClick={() => setShowPeopleDropdown(!showPeopleDropdown)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 bg-white rounded-md text-left focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 bg-white rounded-[100px] text-left focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <span className="text-gray-700">{selectedPeople}</span>
                   <img 
                     src={ChevronDownIcon} 
                     alt="Chevron" 
-                    className={`h-4 w-4 text-gray-400 transform transition-transform ${showPeopleDropdown ? 'rotate-180' : 'rotate-90'}`} 
+className={`h-4 w-4 text-gray-400 transform transition-transform ${
+  showPeopleDropdown ? 'rotate-180' : 'rotate-[270deg]'
+}`}
                   />
                 </button>
                 {showPeopleDropdown && (
@@ -155,19 +173,19 @@ const Reports = () => {
 
             {/* Select Tags */}
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#33333399] mb-3">
                 Select Tags
               </label>
               <div className="relative">
                 <button
                   onClick={() => setShowTagsDropdown(!showTagsDropdown)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 bg-white rounded-md text-left focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 bg-white rounded-[100px] text-left focus:border-[#8DE87F] hover:border-[#8DE87F] focus:outline-none"
                 >
                   <span className="text-gray-700">{selectedTags}</span>
                   <img 
                     src={ChevronDownIcon} 
                     alt="Chevron" 
-                    className={`h-4 w-4 text-gray-400 transform transition-transform ${showTagsDropdown ? 'rotate-180' : 'rotate-90'}`} 
+                    className={`h-4 w-4 text-gray-400 transform transition-transform ${showTagsDropdown ? 'rotate-180' : 'rotate-[270deg]'}`} 
                   />
                 </button>
                 {showTagsDropdown && (
@@ -191,15 +209,16 @@ const Reports = () => {
 
             {/* From Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#33333399] mb-3">
                 From
               </label>
               <div className="relative">
                 <input
                   type="date"
                   value={fromDate}
+                  
                   onChange={(e) => setFromDate(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-[100px] focus:border-[#8DE87F] hover:border-[#8DE87F] focus:outline-none"
                   placeholder="Choose date"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -210,7 +229,7 @@ const Reports = () => {
 
             {/* To Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#33333399] mb-3">
                 To
               </label>
               <div className="relative">
@@ -218,7 +237,7 @@ const Reports = () => {
                   type="date"
                   value={toDate}
                   onChange={(e) => setToDate(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-[100px] focus:border-[#8DE87F] hover:border-[#8DE87F] focus:outline-none"
                   placeholder="Choose date"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -229,8 +248,8 @@ const Reports = () => {
           </div>
 
           {/* Download History Section */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className=" ">
+            <div className=" py-[18px]">
               <h2 className="text-lg font-medium text-gray-900">Download history</h2>
             </div>
             
@@ -254,13 +273,10 @@ const Reports = () => {
                     <tr key={item.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className="flex-shrink-0 w-8 h-8">
-                            <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
-                              <span className="text-xs font-medium text-red-600">PDF</span>
-                            </div>
-                          </div>
+                                              <img src={PDFIcon} alt="Calendar" className="h-6 w-6 " />
+
                           <div className="ml-3">
-                            <div className="text-sm font-medium text-gray-900">
+                            <div className="text-sm font-medium text-[#333333]">
                               {item.name}
                             </div>
                           </div>
@@ -272,7 +288,7 @@ const Reports = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => handleDownload(item.name)}
-                          className="inline-flex items-center p-2 border border-transparent rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          className="inline-flex items-center p-2 border border-transparent rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:border-[#8DE87F] hover:border-[#8DE87F] focus:outline-none"
                         >
                           <img src={DownloadIcon} alt="Download" className="h-5 w-5" />
                         </button>
