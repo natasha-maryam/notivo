@@ -116,7 +116,7 @@ const PeopleManagementTab = () => {
                   </span>
                 </td>
                 <td className="py-3 px-4">
-                  <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-blue-100 text-[#287AFF]">
+                  <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-blue-50 text-[#287AFF]">
                     <img
                       src={LeadIcon}
                       alt=""
@@ -136,7 +136,13 @@ const PeopleManagementTab = () => {
                   </span>
                 </td>
                 <td className="py-3 px-4">
-                  <img src={LeftIcon} alt="Left Arrow" className="w-4 h-4" />
+                  <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium">
+                    <img
+                      src={LeftIcon}
+                      alt=""
+                      className="w-[18px] h-[18px]"
+                    />
+                  </span>
                 </td>
               </tr>
             ))}
