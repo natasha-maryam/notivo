@@ -1,7 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import SearchIcon from "../assets/svgs/search-refraction.svg";
 import LayoutLeft from "../assets/svgs/layout-left.svg";
-import NotesIcon from "../assets/svgs/notes.svg";
+import AItips from "../assets/svgs/ai-tips.svg";
+import Emojie from "../assets/svgs/emojie.svg";
+import SendButtom from "../assets/svgs/chat-send.svg";
 import Menu from "../assets/svgs/dots-vertical.svg";
 import RichTextEditor from "../components/RichTextEditor";
 
@@ -20,57 +22,62 @@ interface NotesProps {
   sidebarCollapsed?: boolean;
 }
 
-const Notes: React.FC<NotesProps> = ({ 
+const Notes: React.FC<NotesProps> = ({
   onToggleSidebar,
-  sidebarCollapsed = false 
+  sidebarCollapsed = false,
 }) => {
   // Mock data for notes
   const notes: Note[] = [
     {
       id: "1",
       title: "Team Feedback – April 2025",
-      content: "@Sarah showed strong initiative during the client rollout phase and handled unexpected feedback with clarity.\n\n@John Wilson needs support around planning and time estimates – missed internal review deadlines twice this month.\n\n@Giovanni improved cross-department communication and collaborated effectively with QA on the shipment module.\n\n@Emma showed leadership potential in onboarding sessions and offered to lead knowledge-sharing next quarter.\n\nPlease keep track of these developments and follow up on open coaching items by mid-May.\n\nNotes:\n• One-on-one sessions completed with 3/4 direct reports\n• Project Bravo delayed, team feels overloaded\n• Next team review scheduled: May 20\n• Add follow-up items for @John Wilson",
+      content:
+        "@Sarah showed strong initiative during the client rollout phase and handled unexpected feedback with clarity.\n\n@John Wilson needs support around planning and time estimates – missed internal review deadlines twice this month.\n\n@Giovanni improved cross-department communication and collaborated effectively with QA on the shipment module.\n\n@Emma showed leadership potential in onboarding sessions and offered to lead knowledge-sharing next quarter.\n\nPlease keep track of these developments and follow up on open coaching items by mid-May.\n\nNotes:\n• One-on-one sessions completed with 3/4 direct reports\n• Project Bravo delayed, team feels overloaded\n• Next team review scheduled: May 20\n• Add follow-up items for @John Wilson",
       date: "August 14, 2025 at 7:50 PM",
       color: "bg-green-400",
       tags: ["#feedback", "#April", "#teamhealth", "#coaching", "#milestone"],
-      mentions: ["@Sarah", "@John Wilson", "@Giovanni", "@Emma"]
+      mentions: ["@Sarah", "@John Wilson", "@Giovanni", "@Emma"],
     },
     {
       id: "2",
       title: "Coaching session – John",
-      content: "Today's 1-on-1 review and planning session with @John focused on time management and project estimation skills.\n\nKey discussion points:\n• Time estimation challenges on recent projects\n• Need for better planning frameworks\n• Upcoming deadline management strategies\n\nAction items:\n• Schedule follow-up session for next week\n• Provide planning template resources\n• Set up mentorship with @Sarah for project estimation\n\n#coaching #development #planning",
+      content:
+        "Today's 1-on-1 review and planning session with @John focused on time management and project estimation skills.\n\nKey discussion points:\n• Time estimation challenges on recent projects\n• Need for better planning frameworks\n• Upcoming deadline management strategies\n\nAction items:\n• Schedule follow-up session for next week\n• Provide planning template resources\n• Set up mentorship with @Sarah for project estimation\n\n#coaching #development #planning",
       date: "August 14, 2025 at 7:48 PM",
       color: "bg-orange-400",
       tags: ["#coaching", "#development", "#planning"],
-      mentions: ["@John", "@Sarah"]
+      mentions: ["@John", "@Sarah"],
     },
     {
       id: "3",
       title: "Site visit summary",
-      content: "Observations from the factory site visit conducted today. Overall operations running smoothly with some areas for improvement.\n\nKey observations:\n• Production line efficiency at 85%\n• Quality control processes working well\n• Staff morale generally positive\n• Equipment maintenance schedule needs updating\n\nRecommendations:\n• Implement new maintenance tracking system\n• Schedule quarterly efficiency reviews\n• Consider staff recognition program\n\n#site-visit #operations #quality",
+      content:
+        "Observations from the factory site visit conducted today. Overall operations running smoothly with some areas for improvement.\n\nKey observations:\n• Production line efficiency at 85%\n• Quality control processes working well\n• Staff morale generally positive\n• Equipment maintenance schedule needs updating\n\nRecommendations:\n• Implement new maintenance tracking system\n• Schedule quarterly efficiency reviews\n• Consider staff recognition program\n\n#site-visit #operations #quality",
       date: "August 14, 2025 at 7:45 PM",
       color: "bg-red-400",
       tags: ["#site-visit", "#operations", "#quality"],
-      mentions: []
+      mentions: [],
     },
     {
       id: "4",
       title: "Client feedback – rollout",
-      content: "Notes from call with client post-rollout phase. Overall positive feedback with some areas for improvement.\n\nPositive feedback:\n• Smooth deployment process\n• Good communication throughout\n• User training was effective\n\nAreas for improvement:\n• Response times could be faster\n• More detailed documentation needed\n• Regular check-ins would be beneficial\n\nNext steps:\n• Schedule weekly status calls\n• Prepare comprehensive user guide\n• Set up feedback collection system\n\n#client-feedback #rollout #improvement",
+      content:
+        "Notes from call with client post-rollout phase. Overall positive feedback with some areas for improvement.\n\nPositive feedback:\n• Smooth deployment process\n• Good communication throughout\n• User training was effective\n\nAreas for improvement:\n• Response times could be faster\n• More detailed documentation needed\n• Regular check-ins would be beneficial\n\nNext steps:\n• Schedule weekly status calls\n• Prepare comprehensive user guide\n• Set up feedback collection system\n\n#client-feedback #rollout #improvement",
       date: "August 14, 2025 at 7:42 PM",
       color: "bg-gray-400",
       tags: ["#client-feedback", "#rollout", "#improvement"],
-      mentions: []
+      mentions: [],
     },
     {
       id: "5",
       title: "Weekly planning recap",
-      content: "Team goals aligned for next sprint. Planning session was productive with clear objectives set.\n\nSprint goals:\n• Complete user authentication module\n• Finalize API documentation\n• Conduct user testing sessions\n• Prepare deployment checklist\n\nTeam assignments:\n• @Mike - Authentication module\n• @Lisa - API documentation\n• @Tom - User testing coordination\n\nRisks identified:\n• Tight timeline for testing phase\n• Dependency on external API updates\n\n#planning #sprint #goals #team",
+      content:
+        "Team goals aligned for next sprint. Planning session was productive with clear objectives set.\n\nSprint goals:\n• Complete user authentication module\n• Finalize API documentation\n• Conduct user testing sessions\n• Prepare deployment checklist\n\nTeam assignments:\n• @Mike - Authentication module\n• @Lisa - API documentation\n• @Tom - User testing coordination\n\nRisks identified:\n• Tight timeline for testing phase\n• Dependency on external API updates\n\n#planning #sprint #goals #team",
       date: "August 13, 2025 at 3:25 PM",
       color: "bg-gray-400",
       tags: ["#planning", "#sprint", "#goals", "#team"],
-      mentions: ["@Mike", "@Lisa", "@Tom"]
-    }
+      mentions: ["@Mike", "@Lisa", "@Tom"],
+    },
   ];
 
   // Initialize selectedNote as null for mobile-first approach
@@ -78,6 +85,10 @@ const Notes: React.FC<NotesProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showMentionDropdown, setShowMentionDropdown] = useState(false);
+  const [mentionPosition, setMentionPosition] = useState({ top: 0, left: 0 });
+  const [textareaContent, setTextareaContent] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Check screen size on mount and resize
   useEffect(() => {
@@ -85,23 +96,41 @@ const Notes: React.FC<NotesProps> = ({
       const isMobileScreen = window.innerWidth < 768;
       setIsMobile(isMobileScreen);
     };
-    
+
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  // Close mention dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showMentionDropdown && textareaRef.current && !textareaRef.current.contains(event.target as Node)) {
+        setShowMentionDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showMentionDropdown]);
 
   const filteredNotes = notes.filter(
     (note) =>
       note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      note.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      note.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   // Group notes manually by Today and Yesterday
-  const todayNotes = filteredNotes.filter(note => note.date.includes("August 14, 2025"));
-  const yesterdayNotes = filteredNotes.filter(note => note.date.includes("August 13, 2025"));
+  const todayNotes = filteredNotes.filter((note) =>
+    note.date.includes("August 14, 2025")
+  );
+  const yesterdayNotes = filteredNotes.filter((note) =>
+    note.date.includes("August 13, 2025")
+  );
 
   const handleNoteSelect = useCallback((note: Note) => {
     setSelectedNote(note);
@@ -115,14 +144,78 @@ const Notes: React.FC<NotesProps> = ({
 
   const [showSearch, setShowSearch] = useState(false);
 
+  // People data for mentions
+  const people = [
+    { name: "Johanna Fox", id: "johanna" },
+    { name: "John Wilson", id: "john_wilson" },
+    { name: "Sarah Johnson", id: "sarah" },
+  ];
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    const cursorPosition = e.target.selectionStart;
+    setTextareaContent(value);
+
+    // Check if user typed @ and show dropdown
+    const lastAtIndex = value.lastIndexOf('@', cursorPosition - 1);
+    if (lastAtIndex !== -1) {
+      const textAfterAt = value.substring(lastAtIndex + 1, cursorPosition);
+      // Only show if there's no space after @ (still typing the mention)
+      if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
+        if (textareaRef.current) {
+          const rect = textareaRef.current.getBoundingClientRect();
+          setMentionPosition({
+            top: rect.bottom + 5,
+            left: rect.left + 10
+          });
+          setShowMentionDropdown(true);
+        }
+      } else {
+        setShowMentionDropdown(false);
+      }
+    } else {
+      setShowMentionDropdown(false);
+    }
+  };
+
+  const insertMention = (person: { name: string; id: string }) => {
+    if (textareaRef.current) {
+      const textarea = textareaRef.current;
+      const cursorPosition = textarea.selectionStart;
+      const value = textareaContent;
+      
+      // Find the last @ before cursor
+      const lastAtIndex = value.lastIndexOf('@', cursorPosition - 1);
+      if (lastAtIndex !== -1) {
+        // Replace from @ to current cursor position with the mention
+        const beforeAt = value.substring(0, lastAtIndex);
+        const afterCursor = value.substring(cursorPosition);
+        const newValue = beforeAt + `@${person.name} ` + afterCursor;
+        
+        setTextareaContent(newValue);
+        setShowMentionDropdown(false);
+        
+        // Update textarea value directly and set cursor position
+        textarea.value = newValue;
+        const newCursorPos = beforeAt.length + `@${person.name} `.length;
+        
+        // Use requestAnimationFrame to ensure DOM update
+        requestAnimationFrame(() => {
+          textarea.setSelectionRange(newCursorPos, newCursorPos);
+          textarea.focus();
+        });
+      }
+    }
+  };
+
   const handleSave = (title: string, content: string) => {
     if (selectedNote) {
       // Update the selected note with new content
-      console.log('Saving note:', { title, content });
+      console.log("Saving note:", { title, content });
       // Here you would typically send the updated content to your backend
     }
   };
-  
+
   return (
     <div className="h-full flex font-poppins relative">
       {/* Left Panel - Notes List */}
@@ -312,21 +405,102 @@ const Notes: React.FC<NotesProps> = ({
           </>
         ) : (
           !isMobile && (
-            <div className="flex-1 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <img
-                    src={NotesIcon}
-                    alt="Notes"
-                    className="w-8 h-8 text-gray-400"
-                  />
+            <div className="flex justify-center items-center h-full">
+              <div className={`p-4 ${isMobile ? "pb-6" : ""}`}>
+                <div className="space-y-4 max-w-[900px] w-[900px]">
+                  <div className="relative border border-[#EDEDED] hover:border-[#8DE87F] focus-within:border-[#8DE87F] rounded-xl p-4 transition-colors">
+                    <textarea
+                      ref={textareaRef}
+                      placeholder="Start write new note here..."
+                      value={textareaContent}
+                      onChange={handleTextareaChange}
+                      className={`w-full  border-none outline-none resize-none ${
+                        isMobile ? "min-h-[60px]" : "min-h-[60px]"
+                      } placeholder:text-gray-400 text-gray-900`}
+                      rows={isMobile ? 2 : 3}
+                    />
+
+                    {/* Mention Dropdown */}
+                    {showMentionDropdown && (
+                      <div
+                        className="fixed bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        style={{
+                          top: mentionPosition.top,
+                          left: mentionPosition.left,
+                          minWidth: "200px",
+                        }}
+                      >
+                        {people.map((person) => (
+                          <div
+                            key={person.id}
+                            onClick={() => insertMention(person)}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
+                          >
+                            <span className="text-sm text-gray-900">
+                              {person.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center space-x-4">
+                        <button className="flex items-center space-x-2 text-[12px] border border-[#EDEDED] rounded-full px-4 py-1">
+                          <img src={AItips} alt="AI Tips" className="w-3 h-3" />
+                          <span>Ai tips</span>
+                        </button>
+                        <button className="flex items-center space-x-2 text-[12px] border border-[#EDEDED] rounded-full px-4 py-1">
+                          <span>@Tags</span>
+                        </button>
+                        <button className="flex items-center space-x-2 text-[12px] border border-[#EDEDED] rounded-full px-4 py-1">
+                          <span>#Keywords</span>
+                        </button>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <button className="p-2 text-gray-400 hover:text-gray-600">
+                          <span className="text-lg">@</span>
+                        </button>
+                        <button className="p-2 text-gray-400 hover:text-gray-600">
+                          <span className="text-lg">#</span>
+                        </button>
+                        <button className="p-2 text-gray-400 hover:text-gray-600">
+                          <img src={Emojie} alt="Emoji" className="w-6 h-6" />
+                        </button>
+                        <button className="p-2 text-gray-400 hover:text-gray-600">
+                          <img
+                            src={SendButtom}
+                            alt="Send"
+                            className="w-6 h-6"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className={`flex flex-wrap gap-2 mt-3 pt-3 ${
+                      isMobile ? "text-sm" : ""
+                    }`}
+                  >
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      #landing page
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      #word press
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      #important
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      #Meetings
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      @sara
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full cursor-pointer hover:bg-gray-200 transition-colors">
+                      @jhan
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  Select a note
-                </h3>
-                <p className="text-gray-600">
-                  Choose from your existing notes to view content
-                </p>
               </div>
             </div>
           )
