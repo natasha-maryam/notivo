@@ -26,6 +26,8 @@ const Notes: React.FC<NotesProps> = ({
   onToggleSidebar,
   sidebarCollapsed = false,
 }) => {
+
+  
   // Mock data for notes
   const notes: Note[] = [
     {
@@ -208,13 +210,6 @@ const Notes: React.FC<NotesProps> = ({
     }
   };
 
-  const handleSave = (title: string, content: string) => {
-    if (selectedNote) {
-      // Update the selected note with new content
-      console.log("Saving note:", { title, content });
-      // Here you would typically send the updated content to your backend
-    }
-  };
 
   return (
     <div className="h-full flex font-poppins relative">
@@ -391,18 +386,15 @@ const Notes: React.FC<NotesProps> = ({
           isMobile ? (selectedNote ? "w-full" : "hidden") : "flex-1"
         } flex flex-col bg-white transition-all duration-300`}
       >
+    
         {selectedNote ? (
-          <>
-            {/* Rich Text Editor */}
-            <RichTextEditor
-              title={selectedNote.title}
-              content={selectedNote.content}
-              tags={selectedNote.tags}
-              onSave={handleSave}
-              onBack={handleBackToNotes}
-              isMobile={isMobile}
-            />
-          </>
+          <RichTextEditor
+            title={selectedNote.title}
+            content={selectedNote.content}
+            tags={selectedNote.tags}
+            onBack={handleBackToNotes}
+            isMobile={isMobile}
+          />
         ) : (
           !isMobile && (
             <div className="flex justify-center items-center h-full">

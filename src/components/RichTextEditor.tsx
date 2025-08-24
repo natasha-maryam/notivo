@@ -18,6 +18,7 @@ import MicrophoneIcon from '../assets/svgs/editor/Microphone.svg';
 // Import other icons
 import EmojieIcon from '../assets/svgs/emojie.svg';
 import AlternateEmailIcon from '../assets/svgs/editor/alternate_email.svg';
+import Notification from './Notification';
 
 interface RichTextEditorProps {
   title: string;
@@ -32,7 +33,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   title,
   content,
   tags,
-  onSave,
   onBack,
   isMobile = false
 }) => {
@@ -42,6 +42,22 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [currentColor, setCurrentColor] = useState('#000000');
   const contentRef = useRef<HTMLDivElement>(null);
+    // Notification state
+  const [notification, setNotification] = useState<{ type: 'success' | 'error' | 'warning' | null; message: string }>({ type: null, message: '' });
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+    const handleSave = (title: string, content: string) => {
+
+      // Show notification on save
+      setNotification({ type: 'success', message: 'Note saved successfully' });
+      setHasUnsavedChanges(false);
+      setTimeout(() => {
+        setNotification({ type: null, message: '' });
+      }, 3000);
+      // Here you would typically send the updated content to your backend
+    
+  };
+
 
   // Function to parse text and highlight mentions and tags
   const parseTextWithMentionsAndTags = (text: string) => {
@@ -172,13 +188,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     setSelectedHeading(headingType);
   };
 
-  const handleSave = () => {
-    if (onSave && contentRef.current) {
-      const contentText = contentRef.current.innerText || contentRef.current.textContent || '';
-      onSave(editorTitle, contentText);
-    }
-  };
-
   return (
     <div className="flex-1 flex flex-col bg-white">
       {/* Editor Header */}
@@ -230,8 +239,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             </button>
           </div>
           <button
-            onClick={handleSave}
-            className="px-4 py-2 bg-[#ECECED] text-black rounded-lg hover:bg-gray-300 transition-colors"
+            onClick={()=> handleSave(editorTitle, editorContent)}
+            className="px-4 py-2 bg-[#ECECED] text-black rounded-lg  transition-colors hover:bg-[#ECECED]"
           >
             Save
           </button>
@@ -467,6 +476,13 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           </div>
         </div>
       </div>
+      {/* Place Notification below toolbar, above editor body */}
+      <Notification
+        type={notification.type}
+        message={notification.message}
+        onClose={() => setNotification({ type: null, message: "" })}
+        unsaved={hasUnsavedChanges}
+      />
 
       {/* Editor Content */}
       <div className="flex-1 px-6 py-6 overflow-y-auto">
@@ -490,7 +506,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             style={{ whiteSpace: "pre-wrap" }}
           >
             {renderContent(content)}
-            
+
             {/* Tags at bottom of content */}
             <div className="mt-8 pt-4">
               <div className="flex flex-wrap gap-2 mb-4">
@@ -504,7 +520,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
                   </span>
                 ))}
               </div>
-              
+
               {/* Input Area */}
               <div className="flex items-center space-x-3 py-2">
                 <span className="text-gray-500">Type here</span>

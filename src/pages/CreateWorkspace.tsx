@@ -27,7 +27,7 @@ import Heading from "../assets/svgs/heading-square.svg"
 import Divider from "../assets/svgs/divider.svg";
 import Send from "../assets/svgs/chat-send.svg"
 import InsertNoteModal from "../components/InsertNoteModal";
-import Cross from "../assets/svgs/into.svg"
+import Notification from "../components/Notification";
 
 const CreateWorkspace = () => {
   const navigate = useNavigate();
@@ -271,27 +271,12 @@ const CreateWorkspace = () => {
         </div>
 
         {/* Success/Error/Warning Notification */}
-        {notification.type && (
-          <div
-            className={`mx-6 mt-4 mb-2 px-4 py-2 flex items-center justify-between h-[32px] text-[12px] ${
-              notification.type === "success"
-                ? "bg-[#008844]/10 text-[#008844]"
-                : notification.type === "warning"
-                ? "bg-[#E16B16]/10 text-[#E16B16] "
-                : "bg-[#E6483D]/10 text-[#E6483D]"
-            }`}
-          >
-            <div className="flex items-center">
-              <span className="font-medium">{notification.message}</span>
-            </div>
-            <button
-              onClick={handleCloseNotification}
-              className={`ml-4`}
-            >
-              <img src={Cross}/>
-            </button>
-          </div>
-        )}
+        <Notification
+          type={notification.type}
+          message={notification.message}
+          onClose={handleCloseNotification}
+          unsaved={hasUnsavedChanges}
+        />
 
         {/* Editor Content Area */}
         <div className="flex-1 px-6 py-2 h-full">
