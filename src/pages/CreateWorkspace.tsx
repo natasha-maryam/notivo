@@ -44,27 +44,21 @@ const CreateWorkspace = () => {
     navigate("/workspaces");
   };
 
+  // Track save attempts
+  const [saveAttempt, setSaveAttempt] = useState(0);
+
   const handleSave = async () => {
-    try {
-      // Simulate save operation
-      // In a real app, you would make an API call here
-      setHasUnsavedChanges(false); // Mark as saved
+    if (saveAttempt === 0) {
+      // First time: show success
+      setHasUnsavedChanges(false);
       setNotification({ type: 'success', message: 'Note saved successfully' });
-      
-      // Hide notification after 3 seconds
+      setSaveAttempt(1);
       setTimeout(() => {
         setNotification({ type: null, message: '' });
       }, 3000);
-      
-      // Uncomment to navigate after successful save
-      // setTimeout(() => {
-      //   navigate("/workspaces");
-      // }, 1500);
-      
-    } catch (error) {
+    } else {
+      // Second time: show failure (same as current failure logic)
       setNotification({ type: 'error', message: 'Failed to save note - try again' });
-      
-      // Hide notification after 5 seconds for errors, then show warning again
       setTimeout(() => {
         setNotification({ type: 'warning', message: 'Unsaved changes. Don\'t forget to save.' });
       }, 5000);
